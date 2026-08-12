@@ -1,0 +1,76 @@
+generated: '2026-08-12'
+method: searched
+source: https://help.sendowl.com/help/swap-between-live-and-test
+note: >-
+  SendOwl has no separate sandbox host, no separate API base URL and no test-vs-live API key prefixes.
+  Testing is a MODE on the payment gateway rather than a parallel environment: the same
+  api.sendowl.com/api/v1 endpoints and the same API key/secret serve both, and a product's test/live
+  behaviour is decided by the Stripe sell-mode setting on the account or on the individual product.
+  Test values below are Stripe's published test card, quoted from SendOwl's own help articles — no
+  values are invented here.
+environments:
+- name: production
+  base_url: https://api.sendowl.com/api/v1
+  note: Single environment; there is no sandbox base URL.
+key_separation:
+  test_key_prefix: null
+  live_key_prefix: null
+  note: >-
+    One API key/secret pair per account, created at
+    https://dashboard.sendowl.com/settings/api_credentials. No test-mode credential exists, so an agent
+    cannot tell from the credential alone whether it is operating against real money.
+modes:
+- name: Stripe Test mode (account-wide)
+  location: Settings > Payment gateway > Stripe
+  setting: Switch between "Live and Test modes", then click Update
+  scope: Applies across all products
+  source: https://help.sendowl.com/help/swap-between-live-and-test
+- name: Stripe Payments Sell Mode (per product)
+  location: Products > Edit product > Advanced options
+  setting: Dropdown with "Use default" (account setting), "Live", "Test"
+  scope: One product
+  source: https://help.sendowl.com/help/swap-between-live-and-test
+- name: Product test mode
+  location: Product settings
+  note: >-
+    Referenced by the API's own validation message on product create — "Attachment must be present or
+    test mode switched on" — so a product can be created without an uploaded file when test mode is on.
+  source: https://dashboard.sendowl.com/developers/api/introduction
+test_values:
+  cards:
+  - brand: Visa (Stripe test card)
+    number: '4242 4242 4242 4242'
+    expiry: Any future date
+    cvv: Any 3 digits
+    note: '"No actual payments will process with this credit card number."'
+    source: https://help.sendowl.com/help/swap-between-live-and-test
+  bank_accounts: []
+  tokens: []
+gateway_coverage:
+  stripe: Supports test mode.
+  paypal: >-
+    "PayPal lacks this feature" — no test mode; SendOwl documents alternative approaches (issuing a
+    free order to yourself) for testing PayPal flows.
+  source: https://help.sendowl.com/help/how-to-run-test-orders-in-sendowl
+test_order_visibility:
+  note: Test orders are labelled "Test" in the Orders dashboard, appear separately from live
+    transactions, and are still included in reports.
+  source: https://help.sendowl.com/help/how-to-run-test-orders-in-sendowl
+free_order_issue:
+  note: >-
+    POST /api/v1/products/{product_id}/issue issues an order for a product without taking payment — the
+    documented API-side path for generating a test or comped order, including a full
+    financial_transaction block for imported/simulated payment data.
+  source: https://dashboard.sendowl.com/developers/api/products
+test_clocks: null
+fixtures_or_triggers: null
+gaps:
+- No sandbox API host or test credentials — the API is production-only.
+- No webhook test/replay tool documented for verifying an HMAC-SHA256 receiver before going live.
+x-evidence:
+- url: https://help.sendowl.com/help/swap-between-live-and-test
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://help.sendowl.com/help/how-to-run-test-orders-in-sendowl
+  http_status: 200
+  fetched: '2026-08-12'

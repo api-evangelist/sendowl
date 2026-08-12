@@ -1,0 +1,77 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+docs: https://help.sendowl.com/help/using-the-api
+note: >-
+  Derived-from-OpenAPI was not possible — SendOwl publishes no OpenAPI/Swagger document (see
+  conformance/sendowl-conformance.yml). This profile is read directly from the provider's own API
+  reference and help-center auth article.
+summary:
+  types:
+  - http
+  api_key_in:
+  - header
+  oauth2_flows: []
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: >-
+    "In order for API calls to be accepted they must be sent with authorisation information.
+    Specifically, an API key and secret must be passed through via Basic Auth." The API key is the
+    Basic-Auth username and the API secret is the password, sent on the Authorization header.
+  credential:
+    username: API key
+    password: API secret
+    provisioning_url: https://dashboard.sendowl.com/settings/api_credentials
+    enabled_by_default: false
+    enablement: >-
+      "By default the API is not enabled on accounts so you must navigate to the Settings section,
+      click the API link in the Advanced section and follow onscreen instructions to set this up."
+  example_documented: 'curl -H "Accept: text/xml" https://KEY:SECRET@api.sendowl.com/api/v1/products'
+  sources:
+  - https://dashboard.sendowl.com/developers/api/introduction
+  - https://help.sendowl.com/help/using-the-api
+permissions:
+  model: per-key permission checkboxes assigned at key creation
+  documented: >-
+    "When creating API keys, you'll be prompted to assign permissions... In most cases, it's best to
+    click the Manager checkbox for full permissions."
+  named_roles:
+  - Manager
+  note: >-
+    SendOwl publishes no enumerated scope/permission reference, so the full set of checkboxes is not
+    machine-readable. There is no OAuth surface and therefore no scopes/ artifact for this provider.
+  source: https://help.sendowl.com/help/using-the-api
+transport:
+  https_required: false
+  documented: >-
+    "Although not required, it is highly recommended to send requests over HTTPS due to the nature of
+    the information and the fact that the API key and secret will be sent in plaintext otherwise."
+  note: >-
+    HTTPS is recommended rather than enforced in the documentation; the credential is a long-lived
+    static key/secret pair with no rotation or expiry contract published.
+webhook_authentication:
+  direction: inbound-to-subscriber
+  header: X-SENDOWL-HMAC-SHA256
+  algorithm: HMAC-SHA256, base64-encoded
+  key: The Signing Key Secret from the SendOwl API settings page
+  payload: The raw request JSON body
+  source: https://help.sendowl.com/help/using-web-hooks
+guidance:
+  credential_exposure: >-
+    SendOwl explicitly warns against embedding API credentials in distributed software: "Do not include
+    calls to this API endpoint in your software... this will expose your API key and secret to anyone
+    examining your source code or watching wire data." License validation should be proxied through the
+    seller's own server.
+  source: https://dashboard.sendowl.com/developers/api/licenses
+x-evidence:
+- url: https://dashboard.sendowl.com/developers/api/introduction
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://help.sendowl.com/help/using-the-api
+  http_status: 200
+  fetched: '2026-08-12'

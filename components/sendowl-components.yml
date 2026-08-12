@@ -1,0 +1,95 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/sendowl-js
+note: >-
+  SendOwl's client-side surface is a single first-party JavaScript loader plus a set of hosted checkout
+  and storefront surfaces served from transactions.sendowl.com. This is the provider's primary
+  integration path for non-developers — the REST API is the deeper, secondary path.
+loaders:
+- name: sendowl.js
+  url: https://transactions.sendowl.com/assets/sendowl.js
+  global: sendOwl
+  versioned: false
+  documentation: https://dashboard.sendowl.com/developers/api/sendowl-js
+  description: >-
+    "The sendowl.js file is used to provide the checkout in a lightbox on the host site. It also
+    contains the cart widget and an API that can be used to control elements of the cart
+    programatically."
+  note: Unpinned CDN URL — no version in the path and no integrity/SRI guidance published.
+families:
+- family: Checkout
+  components:
+  - name: Lightbox / modal checkout
+    kind: hosted-overlay
+    description: Overlay checkout rendered on the merchant's own page without navigating away;
+      activated automatically by including sendowl.js and using SendOwl purchase links or forms.
+  - name: Hosted checkout
+    kind: hosted-page
+    url_pattern: https://transactions.sendowl.com/products/{product_id}/{purchase_key}/purchase
+    description: Full-page hosted checkout addressed by product ID plus a per-product purchase key.
+  - name: Add-to-cart link
+    kind: hosted-page
+    url_pattern: https://transactions.sendowl.com/products/{product_id}/{purchase_key}/add_to_cart
+    description: Adds an item to the buyer's cart; bundles use /packages/{bundle_id}/{bundle_key}/.
+- family: Cart
+  components:
+  - name: Cart widget
+    kind: embeddable-widget
+    description: Embeddable shopping cart included in sendowl.js; persists a buyer cart for 30 days of
+      inactivity (cartItemCount returns null once the cart has lapsed).
+- family: Buttons and links
+  components:
+  - name: Buy Now / Add to Cart button code
+    kind: embed-snippet
+    description: Generated HTML button code per product or bundle carrying the product ID and purchase
+      key; captured automatically by sendowl.js on page load.
+- family: Storefront
+  components:
+  - name: SendOwl Storefront
+    kind: hosted-page
+    description: Hosted branded store page listing a merchant's products.
+    documentation: https://help.sendowl.com/help/selling-from-a-sendowl-storefront
+  - name: Product sales pages
+    kind: hosted-page
+    description: Per-product hosted landing page with SEO-optimized markup and custom URLs.
+javascript_api:
+  events:
+  - name: sendOwl.abandonCallback
+    signature: sendOwl.abandonCallback = function() { ... }
+    description: Function called every time a checkout is abandoned.
+  methods:
+  - name: sendOwl.captureLinks
+    signature: sendOwl.captureLinks()
+    description: Capture SendOwl link clicks — needed only for AJAX-loaded content added after
+      sendowl.js has run.
+  - name: sendOwl.captureForms
+    signature: sendOwl.captureForms()
+    description: Capture SendOwl form submissions — needed only for AJAX-loaded content.
+  - name: sendOwl.emptyCart
+    signature: sendOwl.emptyCart(merchantID, callback)
+    description: Empties the buyer's cart and invokes the callback when complete.
+  - name: sendOwl.cartItemCount
+    signature: sendOwl.cartItemCount()
+    returns: integer, or null when the buyer has not activated a cart in the last 30 days
+    description: Returns the number of items in the buyer's cart.
+  - name: sendOwl.addProductToCart
+    signature: sendOwl.addProductToCart(productID, productKey, callback)
+    description: Adds a product to the cart; the callback receives {status, message} where message is
+      one of the documented cart error codes.
+  - name: sendOwl.addBundleToCart
+    signature: sendOwl.addBundleToCart(bundleID, bundleKey, callback)
+    description: Adds a bundle (formerly "package") to the cart with the same callback contract.
+  error_codes: errors/sendowl-problem-types.yml
+customization:
+  documented:
+  - Custom checkout CSS & JS ("Full visual and behavioral control", pricing page)
+  - Custom checkout fields
+  - Three mobile-friendly built-in cart templates
+  source: https://www.sendowl.com/pricing
+x-evidence:
+- url: https://dashboard.sendowl.com/developers/api/sendowl-js
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://transactions.sendowl.com/assets/sendowl.js
+  http_status: 200
+  fetched: '2026-08-12'

@@ -1,0 +1,88 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+format: custom
+rfc9457: false
+note: >-
+  SendOwl publishes no OpenAPI, so this catalog is read directly from the documented status codes and
+  error payloads on the API reference pages rather than derived from a spec. Errors are not RFC 9457
+  problem+json: the JSON form is an array of [field, message] pairs and the XML form is an <errors>
+  list of sentences. There is no stable machine-readable error code, type URI, or documentation link,
+  so agent-side branching has to match on field name and message text.
+envelope:
+  json: '[["attachment","must be present or test mode switched on"],["base","Price cannot be zero or
+    less"]]'
+  xml: '<errors><error>Attachment must be present or test mode switched on</error></errors>'
+  content_types:
+  - application/json
+  - text/xml
+problems:
+- status: 200
+  title: Success
+  detail: Returned on successful read, update and delete operations.
+  source_doc: https://dashboard.sendowl.com/developers/api/products
+- status: 201
+  title: Created
+  detail: Returned on successful create; the Location header points at the created resource (drip
+    items set Location to the associated product or subscription).
+  source_doc: https://dashboard.sendowl.com/developers/api/drip_items
+- status: 400
+  title: Invalid option
+  detail: 'Documented on POST /api/v1/orders/{order_id}/resend_email when the `type` parameter is not
+    one of "order", "transactions" or "all".'
+  source_doc: https://dashboard.sendowl.com/developers/api/orders
+- status: 409
+  title: Conflict — subscription not in a cancellable state
+  detail: Documented on PUT /api/v1/orders/{order_id}/cancel_subscription when the subscription cannot
+    be cancelled from its current state.
+  remediation: Read the order/subscription state before cancelling; do not retry blindly.
+  source_doc: https://dashboard.sendowl.com/developers/api/orders
+- status: 415
+  title: Unsupported media type — Accept header missing or unsupported
+  detail: 'Observed live on https://api.sendowl.com/api/v1/products with no Accept header. Body:
+    "Please specify a supported `Accept` header. Valid options: `application/json`,
+    `application/xml`".'
+  remediation: 'Always send Accept: application/json (and Content-Type on writes).'
+  method: probed
+  source_doc: https://api.sendowl.com/api/v1/products
+- status: 422
+  title: Unprocessable entity — validation failure
+  detail: >-
+    "Should a call use an invalid attribute, not specify all the required fields (on create) or specify
+    a field that fails a validation, a 422 status code will be returned with an explanation of the
+    reason for failure." This is the primary error status across every documented write endpoint
+    (products, bundles, subscriptions, drip items, discounts, licenses, orders).
+  remediation: Read the [field, message] pairs and correct the request; do not retry unchanged.
+  source_doc: https://dashboard.sendowl.com/developers/api/introduction
+client_error_codes:
+  surface: sendowl.js browser library
+  envelope: 'callback result hash: {status: "ok"|"error", message: <code>}'
+  source_doc: https://dashboard.sendowl.com/developers/api/sendowl-js
+  codes:
+  - code: product_sold_out
+    meaning: The product is not purchasable because it is sold out.
+  - code: multiple_currencies_not_permitted
+    meaning: An attempt was made to add an item of one currency to a cart already containing another
+      currency.
+  - code: not_found
+    meaning: The specified product/bundle cannot be found — check the ID and purchase key.
+  - code: single_quantity_item_limit
+    meaning: The specified product cannot be added to the cart more than once.
+  - code: gateway_setup_error
+    meaning: The seller has an invalid payment gateway setup.
+  - code: general_error
+    meaning: Generic failure — contact SendOwl support.
+gaps:
+- No error code registry for the REST API (only free-text messages).
+- No 401/403 documentation for bad or unpermitted API credentials.
+- No documented 429; the stated consequence of exceeding ~1 req/sec is an IP block.
+x-evidence:
+- url: https://dashboard.sendowl.com/developers/api/introduction
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/orders
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://api.sendowl.com/api/v1/products
+  http_status: 415
+  fetched: '2026-08-12'

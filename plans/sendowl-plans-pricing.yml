@@ -1,0 +1,71 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.sendowl.com/pricing
+name: SendOwl plans and pricing
+currency: USD
+billing_periods:
+- monthly
+- annual
+notes: >-
+  All features are included on every plan — SendOwl does not gate API access, webhooks, subscriptions
+  or license keys behind a higher tier ("API access & webhooks — Full developer tools" is listed under
+  "Included for Everyone"). Plans are differentiated by order volume, sales volume and download
+  bandwidth only. Order and sales volumes are calculated over a trailing 12-month period; exceeding a
+  plan limit triggers notification and an automatic upgrade. Annual billing is advertised as "2 months
+  free". SendOwl takes no revenue cut/transaction fee of its own beyond the plan price (page title:
+  "Simple, Flat Pricing — No Revenue Cuts"); payment-gateway fees are charged by Stripe/PayPal.
+plan_count: 4
+plans:
+- name: Launch
+  price: 39
+  price_annual_per_month: 32.5
+  currency: USD
+  period: month
+  audience: For creators just getting started
+  popular: true
+  limits:
+    orders_per_year: 5000
+    sales_per_year_usd: 10000
+    bandwidth_per_month_gb: 10
+    products: unlimited
+    storage: unlimited
+- name: Grow
+  price: 87
+  price_annual_per_month: 72.5
+  currency: USD
+  period: month
+  audience: For growing businesses
+  limits:
+    orders_per_year: 25000
+    sales_per_year_usd: 36000
+    bandwidth_per_month_gb: 20
+    products: unlimited
+    storage: unlimited
+- name: Scale
+  price: 159
+  price_annual_per_month: 132.5
+  currency: USD
+  period: month
+  audience: For established businesses at scale
+  limits:
+    orders_per_year: 50000
+    sales_per_year_usd: 100000
+    bandwidth_per_month_gb: 50
+    products: unlimited
+    storage: unlimited
+- name: Business
+  price: 299
+  price_note: Business plans start at $299/month for up to $200k in annual sales
+  currency: USD
+  period: month
+  audience: Higher volume businesses
+  limits:
+    sales_per_year_usd: 200000
+trial:
+  available: true
+  note: '"Start free trial" / "Sign up for free" is offered on every tier; length not stated on the
+    pricing page.'
+x-evidence:
+- url: https://www.sendowl.com/pricing
+  http_status: 200
+  fetched: '2026-08-12'

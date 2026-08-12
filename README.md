@@ -42,5 +42,26 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Digital Products, Subscriptions, Memberships & M is a company surfaced via the API Evangelist harvest backlog (source: marketing-integration-graph) and added to the network as a stub for full-pipeline profiling.
-- https://sendowl.com/
+SendOwl is a UK-based digital commerce platform for selling digital products, subscriptions,
+memberships, license keys, drip-delivered courses and physical goods, with hosted checkout and
+automated file delivery.
+
+- Website: https://sendowl.com/
+- Developer portal: https://dashboard.sendowl.com/developers
+- API reference: https://dashboard.sendowl.com/developers/api/introduction
+- API base URL: `https://api.sendowl.com/api/v1`
+- Status: https://sendowl.status.io/
+
+## API surface
+
+A public REST API covering products, bundles (packages), subscriptions, drip items, orders,
+discounts and licenses, in JSON or XML selected by the `Accept` header, authenticated with HTTP
+Basic (API key + secret). Version is pinned **per resource** inside one base host — discounts at
+`/api/v1_2/`, orders at `/api/v1_3/`, everything else at `/api/v1/`. Fourteen outbound webhook
+events are signed with `X-SENDOWL-HMAC-SHA256` and retried 10 times with exponential backoff. A
+first-party browser library, `sendowl.js`, drives the lightbox checkout and cart widget.
+
+SendOwl publishes **no machine-readable contract** — no OpenAPI/Swagger, AsyncAPI, GraphQL, MCP
+server or A2A agent card, and no `/.well-known/*` document on any of its four hosts. The artifacts
+in this repo are read from the provider's own hand-written HTML reference and help center, and each
+one records the URL and HTTP status it was read from.

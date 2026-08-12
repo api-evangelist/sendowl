@@ -1,0 +1,46 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+api: SendOwl API
+limit_count: 1
+limits:
+- scope: per-ip
+  window: 1s
+  limit: 1
+  burst: >-
+    Short bursts tolerated — "If you make a couple of calls within a second but then don't call the API
+    again for a short period you will be fine."
+  enforcement: ip-block
+  documented_text: >-
+    "Generally speaking you should not call the API more than once per second or your IP address may be
+    blocked. If you make a couple of calls within a second but then don't call the API again for a short
+    period you will be fine. For higher call rates please contact support."
+  source: https://dashboard.sendowl.com/developers/api/introduction
+response_headers:
+  documented: false
+  observed: []
+  note: >-
+    SendOwl documents no RateLimit-*/X-RateLimit-* headers and no Retry-After contract, and none were
+    observed on an unauthenticated request to https://api.sendowl.com/api/v1/products (which returns
+    415 with an Accept-header hint before any auth or throttle handling). An agent therefore has no
+    runtime signal for remaining quota — the only guidance is the documented "one call per second"
+    ceiling, and the stated consequence of exceeding it is an IP block rather than a 429.
+exhaustion:
+  status_code: null
+  note: No 429 or throttling status code is documented; the documented consequence is IP blocking.
+higher_limits:
+  process: Contact SendOwl support to request a higher call rate.
+  url: https://help.sendowl.com/help
+plan_quotas:
+  note: >-
+    Plan tiers meter orders per year, sales per year and download bandwidth per month (see
+    plans/sendowl-plans-pricing.yml) — these are commercial quotas, not API request limits.
+x-evidence:
+- url: https://dashboard.sendowl.com/developers/api/introduction
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://api.sendowl.com/api/v1/products
+  http_status: 415
+  fetched: '2026-08-12'
+  note: 'Body: "Please specify a supported `Accept` header. Valid options: `application/json`,
+    `application/xml`" — no rate-limit headers present.'

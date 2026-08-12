@@ -1,0 +1,61 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probe
+result: no-hits
+note: >-
+  Every /.well-known/ path was probed against all four SendOwl hosts — the API host
+  (api.sendowl.com), the app/docs host (dashboard.sendowl.com), and the marketing site (sendowl.com and
+  www.sendowl.com). All returned 404 with an HTML error body. SendOwl serves no discovery surface at
+  all: no security.txt, no OIDC/OAuth metadata, no API catalog, no ai-plugin, no agent card. Because
+  nothing returned a real document, NO `WellKnown`, `SecurityTxt` or `AgentCard` pointer is emitted —
+  this file records a verified absence, not a presence.
+hosts:
+- host: https://api.sendowl.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://dashboard.sendowl.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://www.sendowl.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://sendowl.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+files: []
+x-evidence:
+  fetched: '2026-08-12'
+  hosts_probed: 4
+  documents_found: 0

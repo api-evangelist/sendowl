@@ -1,0 +1,121 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+api: SendOwl API
+base_url: https://api.sendowl.com/api/v1
+authentication:
+  style: http-basic
+  credential: API key (username) + API secret (password)
+  detail: authentication/sendowl-authentication.yml
+content_negotiation:
+  formats:
+  - application/json
+  - application/xml
+  - text/xml
+  mechanism: Accept header (required); Content-Type required on create/update
+  documented: >-
+    "The API provides both an XML and JSON interface"; requests without a supported Accept header are
+    rejected. Observed on https://api.sendowl.com/api/v1/products: HTTP 415 with body
+    "Please specify a supported `Accept` header. Valid options: `application/json`, `application/xml`".
+  note: >-
+    Content negotiation is mandatory, not defaulted — an agent that omits Accept gets a 415 rather than
+    JSON. This is the single most likely first-call failure against this API.
+  envelope: >-
+    Payloads are Rails-style singular-root wrapped, e.g. {"product": {...}} on write and
+    [{"product": {...}}] on index responses; XML uses hyphenated element names (created-at) where JSON
+    uses underscores (created_at).
+pagination:
+  style: page-number
+  params:
+    page: page
+    per_page: per_page
+  default_page: 1
+  default_per_page: 10
+  max_per_page: 50
+  example: per_page=50&page=2
+  response_fields: []
+  note: >-
+    No total-count, next-link or Link header is documented — a client cannot tell whether more pages
+    exist except by requesting the next page and getting a short/empty result.
+  applies_to: index actions
+versioning:
+  scheme: uri-path
+  current: v1
+  observed_versions:
+  - v1
+  - v1_2
+  - v1_3
+  detail: >-
+    Version is embedded in the path segment after /api/ and is pinned PER RESOURCE, not per API:
+    products, bundles (packages), subscriptions, drip items and licenses are served at /api/v1/,
+    discounts at /api/v1_2/, and orders at /api/v1_3/. Each resource page publishes its own version
+    history table. A single client therefore addresses three different version prefixes against the
+    same base host.
+  detail_artifact: lifecycle/sendowl-lifecycle.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    SendOwl documents no idempotency key, no request-deduplication window and no safe-retry contract on
+    any write operation — including money-moving operations such as POST
+    /api/v1/orders/{order_id}/refund and POST /api/v1/products/{product_id}/issue. A retried refund is
+    not documented as deduplicated. No Idempotency pointer is emitted for this provider because the
+    capability is genuinely absent.
+request_tracing:
+  request_id_header: null
+  documented: false
+  note: No request-id/correlation-id header is documented for support correlation.
+rate_limiting:
+  documented_limit: ~1 request per second per IP
+  headers: []
+  detail: rate-limits/sendowl-rate-limits.yml
+error_envelope:
+  primary_status: 422
+  format: custom
+  rfc9457: false
+  json_shape: 'Array of [field, message] pairs, e.g. [["attachment","must be present or test mode
+    switched on"],["base","Price cannot be zero or less"]]'
+  xml_shape: '<errors><error>Attachment must be present or test mode switched on</error></errors>'
+  note: >-
+    Errors carry no machine-readable code, type URI or documentation link — only a field name and a
+    human-readable sentence. Programmatic branching requires string matching.
+  detail: errors/sendowl-problem-types.yml
+filtering_and_search:
+  search: 'Most collections expose /search?term={term}; orders additionally support
+    /search?email={email} for exact matches.'
+  order_filters:
+  - from
+  - to
+  - updated_after
+  - orderable
+  - state
+  - referred_by
+  - sort
+  incremental_sync: >-
+    GET /api/v1_3/orders?updated_after={ISO 8601 datetime} is the documented incremental-sync hook for
+    keeping an external system in step with order changes.
+  note: >-
+    Filtering is not uniform — the rich filter set is documented on orders only; other collections
+    offer term search and Shopify variant lookup.
+field_expansion:
+  supported: false
+  note: No expand/include or sparse-fieldset parameter is documented; nested associations (bundle
+    components, subscription drip items) are returned inline.
+metadata:
+  custom_field: >-
+    Products, bundles and subscriptions each expose a single read/write `custom_field` string when the
+    merchant has enabled a custom field; orders expose a `tag` field. There is no arbitrary key/value
+    metadata bag.
+webhooks:
+  detail: asyncapi/sendowl-webhooks.yml
+  signature_header: X-SENDOWL-HMAC-SHA256
+x-evidence:
+- url: https://dashboard.sendowl.com/developers/api/introduction
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/orders
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://api.sendowl.com/api/v1/products
+  http_status: 415
+  fetched: '2026-08-12'

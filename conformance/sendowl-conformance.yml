@@ -1,0 +1,95 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+note: >-
+  Assessed from the provider's published API reference and help center. SendOwl publishes no
+  machine-readable contract (no OpenAPI/Swagger/AsyncAPI/GraphQL), so every entry below is grounded in
+  documentation text or a live probe, not in a spec.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document is served. Probed /openapi.json, /openapi.yaml, /swagger.json,
+    /api-docs, /docs, /redoc on api.sendowl.com; /openapi.json and /swagger.json on
+    dashboard.sendowl.com and www.sendowl.com — all 404. The reference is hand-written HTML.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published; the webhook catalog is documented in prose only (see
+    asyncapi/sendowl-webhooks.yml).
+- id: graphql
+  conforms: false
+  evidence: https://api.sendowl.com/graphql returned 404.
+- id: rest
+  conforms: true
+  evidence: Resource-oriented URIs with GET/POST/PUT/DELETE and conventional 200/201/422 semantics
+    across products, packages, subscriptions, drip_items, orders, discounts and licenses.
+- id: rfc7617-http-basic
+  conforms: true
+  evidence: '"an API key and secret must be passed through via Basic Auth"; documented example uses
+    https://KEY:SECRET@api.sendowl.com/api/v1/products.'
+- id: oauth2
+  conforms: false
+  evidence: No OAuth2 authorization server. /.well-known/oauth-authorization-server returned 404 on
+    api.sendowl.com, dashboard.sendowl.com and www.sendowl.com.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on every probed host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a custom envelope — JSON array of [field, message] pairs, XML <errors> list —
+    with no type/title/status members and no application/problem+json media type.'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy published.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on sendowl.com, www.sendowl.com,
+    dashboard.sendowl.com and api.sendowl.com.
+- id: rfc8615-well-known
+  conforms: false
+  evidence: Every probed /.well-known/* path returned 404 (see well-known/sendowl-well-known.yml).
+- id: hmac-webhook-signing
+  conforms: true
+  evidence: 'Outbound webhooks carry X-SENDOWL-HMAC-SHA256 — a base64 HMAC-SHA256 of the raw request
+    JSON keyed with the account Signing Key Secret.'
+- id: iso4217-currency
+  conforms: true
+  evidence: currency_code and override_currency_code fields on products, bundles, subscriptions and
+    discounts are documented as ISO 4217.
+- id: iso8601-datetime
+  conforms: true
+  evidence: created_at/updated_at are documented as UTC ISO 8601; the orders updated_after filter takes
+    an ISO 8601 datetime.
+- id: pagination
+  conforms: true
+  evidence: page/per_page query parameters, default 10, maximum 50, starting at page 1.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key or deduplication contract on any write operation, including refunds.
+- id: content-negotiation
+  conforms: true
+  evidence: 'JSON and XML selected by Accept header; a missing Accept header returns 415 with the valid
+    options listed.'
+compliance_program:
+  published: false
+  certifications: []
+  note: >-
+    No trust center, compliance page, or named certification (SOC 2, ISO 27001, PCI DSS, HIPAA,
+    FedRAMP) was found. Probed trust.sendowl.com and security.sendowl.com (DNS did not resolve) and
+    www.sendowl.com/trust, /compliance, /security, /gdpr (all 404). SendOwl states that card payments
+    are processed by Stripe and PayPal rather than by SendOwl itself, and the pricing page advertises
+    "Sales tax & EU VAT — Automatic tax calculation and compliance" as a product feature, which is a
+    tax capability claim rather than a security certification. No `Compliance` pointer is emitted.
+x-evidence:
+- url: https://api.sendowl.com/openapi.json
+  http_status: 404
+  fetched: '2026-08-12'
+- url: https://api.sendowl.com/graphql
+  http_status: 404
+  fetched: '2026-08-12'
+- url: https://api.sendowl.com/.well-known/oauth-authorization-server
+  http_status: 404
+  fetched: '2026-08-12'
+- url: https://www.sendowl.com/trust
+  http_status: 404
+  fetched: '2026-08-12'

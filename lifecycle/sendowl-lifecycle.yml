@@ -1,0 +1,130 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://dashboard.sendowl.com/developers/api/introduction
+  note: >-
+    SendOwl versions PER RESOURCE inside one base URL rather than versioning the API as a whole. The
+    documented current path prefix differs by resource, and each resource page carries its own version
+    history table. Older prefixes remain served — the /api/v1 endpoints for products, subscriptions,
+    licenses and drip items are current, not legacy.
+  resource_versions:
+  - resource: products
+    path_prefix: /api/v1
+    history:
+    - version: '1.2'
+      change: Address fields separated into billing and shipping address fields
+    - version: '1.1'
+      change: No changes — version change for other endpoints
+    - version: '1.0'
+      change: Initial release
+  - resource: bundles (packages)
+    path_prefix: /api/v1
+    history:
+    - version: '1.2'
+      change: Address fields separated into billing and shipping address fields
+    - version: '1.1'
+      change: No changes — version change for other endpoints
+    - version: '1.0'
+      change: Initial release
+  - resource: subscriptions
+    path_prefix: /api/v1
+    history:
+    - version: '1.3'
+      change: frequency replaced with frequency_interval and frequency_value for more granular
+        configuration; interval constants updated
+    - version: '1.2'
+      change: Address fields separated into billing and shipping address fields
+    - version: '1.1'
+      change: No changes — version change for other endpoints
+    - version: '1.0'
+      change: Initial release
+  - resource: discounts
+    path_prefix: /api/v1_2
+    history:
+    - version: '1.2'
+      change: Discount codes and product limits separated into their own endpoints and no longer
+        appear in the discount payload
+    - version: '1.1'
+      change: Preferred endpoint URLs updated from /discount_codes to /discounts; payloads renamed to
+        'discounts'; discounts can be limited to specific products/bundles through the API
+    - version: '1.0'
+      change: Initial release — payloads named 'discount_codes'
+  - resource: orders
+    path_prefix: /api/v1_3
+    history:
+    - version: '1.3'
+      change: Current documented order endpoints (index, search, show, update, access grant/revoke)
+    - version: '1.0'
+      change: Initial release; refund, cancel_subscription, resend_email, download_restrictions and
+        override_country remain documented at /api/v1
+  - resource: drip_items
+    path_prefix: /api/v1
+    history:
+    - version: '1.0'
+      change: Initial release
+  - resource: licenses
+    path_prefix: /api/v1
+    history:
+    - version: '1.0'
+      change: Initial release
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  note: >-
+    No deprecation policy, sunset window, Deprecation/Sunset header support (RFC 8594) or end-of-life
+    schedule is published for any API version. The only breaking-change signal available to a consumer
+    is the per-resource version history table on each reference page, which is undated. Because there
+    is no published policy, no `Deprecation` pointer is emitted.
+  renamed_surfaces:
+  - from: packages
+    to: bundles
+    note: '"Please note bundles used to be called packages and the API urls still use this term" —
+      the product renamed but the API path did not, and no alias was added.'
+  - from: /discount_codes
+    to: /discounts
+    note: Endpoint URLs changed at version 1.1; the old naming is documented as superseded.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment was found on the pricing, terms or help-center pages.
+status_page: https://sendowl.status.io/
+status_page_evidence:
+  url: https://sendowl.status.io/
+  http_status: 200
+  title: Sendowl Services
+  linked_from: https://help.sendowl.com/help ("Check our status page")
+  note: >-
+    Hosted on status.io. A probe of the more commonly guessed hosts recorded status.sendowl.com as
+    unresolvable (DNS failure, curl exit code 000) and sendowl.statuspage.io as a 302 to Atlassian's
+    Statuspage marketing site — neither is SendOwl's status page.
+changelog:
+  url: null
+  published: false
+  note: >-
+    No dated product or API changelog is published. /changelog, /changes, /updates and
+    help.sendowl.com/help/whats-new all returned 404. The per-resource API version tables above are
+    the only change record, and they carry no dates — so no changelog/ artifact and no ChangeLog
+    pointer are emitted.
+deprecated_operations: []
+x-evidence:
+- url: https://sendowl.status.io/
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://sendowl.statuspage.io/
+  http_status: 302
+  fetched: '2026-08-12'
+  note: Redirects to https://www.atlassian.com/software/statuspage — not a SendOwl status page.
+- url: https://status.sendowl.com/
+  http_status: 0
+  fetched: '2026-08-12'
+  note: DNS did not resolve.
+- url: https://www.sendowl.com/changelog
+  http_status: 404
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/subscriptions
+  http_status: 200
+  fetched: '2026-08-12'

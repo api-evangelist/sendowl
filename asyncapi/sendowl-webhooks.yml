@@ -1,0 +1,98 @@
+generated: '2026-08-12'
+method: searched
+source: https://help.sendowl.com/help/using-web-hooks
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  SendOwl publishes NO AsyncAPI document — probed /asyncapi.yaml, /asyncapi.json on
+  api.sendowl.com and www.sendowl.com and searched the SendOwl GitHub organization; nothing found. The
+  event surface is documented in prose in the help center, so it is captured here as a webhook catalog
+  and wired as `type: Webhooks`. Nothing has been fabricated into AsyncAPI shape.
+surface: outbound webhooks (HTTP POST from SendOwl to a merchant-supplied URL)
+configuration:
+  url: https://dashboard.sendowl.com/settings/web_hooks
+  fields:
+  - name: Name (merchant's own label)
+  - name: Status (enable/disable)
+  - name: URL (destination the webhook is POSTed to)
+  - name: Event (the trigger)
+  conditions: >-
+    Additional conditions can narrow a webhook, including firing only when the order contains a
+    specific product.
+transport:
+  method: POST
+  content: JSON body ("SendOwl webhooks post the order Liquid to your URL"), read from the raw request
+    body (e.g. php://input)
+  payload_root: order
+  payload_note: >-
+    The payload is the order object rendered from SendOwl's order Liquid template — transaction
+    details, buyer information and cart contents. SendOwl publishes no JSON Schema for it, so consumers
+    must infer the shape from the Liquid variable reference.
+security:
+  signature_header: X-SENDOWL-HMAC-SHA256
+  algorithm: HMAC-SHA256 over the raw request JSON, base64-encoded
+  key: The Signing Key Secret from the SendOwl API settings page
+  documented: >-
+    "create a SHA256 digest using: The Signing Key Secret from your SendOwl API page as the key [and]
+    the request JSON as the data to digest" then base64 encode the result.
+delivery:
+  success_codes:
+  - 2XX
+  - 3XX
+  retry: >-
+    "If any other code is returned (4XX, 5XX etc), we'll retry the request 10 times in an exponential
+    back off."
+  max_attempts: 10
+  backoff: exponential
+  ordering_guarantee: null
+  deduplication: null
+  note: >-
+    No event id, delivery id or replay/redelivery UI is documented, and there is no idempotency
+    contract, so a consumer must dedupe on order/transaction identity itself.
+event_count: 14
+events:
+- name: Fraud review
+  category: order
+- name: Free order issued
+  category: order
+- name: In dispute
+  category: dispute
+- name: New payment
+  category: payment
+- name: Order charged back
+  category: dispute
+- name: Order completed
+  category: order
+- name: Order failed
+  category: order
+- name: Order imported
+  category: order
+- name: Refund issued
+  category: refund
+- name: Subscription active
+  category: subscription
+- name: Subscription cancelled
+  category: subscription
+- name: Subscription cancelling
+  category: subscription
+- name: Subscription complete
+  category: subscription
+- name: Subscription setup
+  category: subscription
+related:
+  polling_alternative: >-
+    GET /api/v1_3/orders?updated_after={ISO 8601 datetime} is the documented pull-based alternative for
+    keeping an external system in sync when webhooks are not viable.
+  source: https://dashboard.sendowl.com/developers/api/orders
+gaps:
+- No AsyncAPI or JSON Schema for the event payloads.
+- No machine-readable event-name identifiers — the events are human-readable labels chosen in a UI
+  dropdown, not stable dotted event types.
+- No signed-timestamp/replay-window guidance alongside the HMAC signature.
+x-evidence:
+- url: https://help.sendowl.com/help/using-web-hooks
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/orders
+  http_status: 200
+  fetched: '2026-08-12'

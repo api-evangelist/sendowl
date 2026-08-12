@@ -1,28 +1,129 @@
 aid: sendowl
 name: SendOwl
-description: SendOwl is a company surfaced via the API Evangelist marketing integration graph — named
-  as an integration by 2 members of the programmable-marketing cohort — and added to the network as a
-  stub for full-pipeline profiling.
+description: SendOwl is a UK-based digital commerce platform that lets creators and small businesses
+  sell digital products, subscriptions, memberships, license keys, drip-delivered courses and physical
+  goods, with hosted checkout, automated file delivery, PDF stamping, affiliate programs, discount
+  codes and EU VAT handling. It exposes a public REST API at api.sendowl.com covering products,
+  bundles (packages), subscriptions, drip items, orders, discounts and licenses in both JSON and XML,
+  authenticated with HTTP Basic using an account API key and secret, alongside an outbound webhook
+  surface signed with HMAC-SHA256 and a browser-side sendowl.js library that drives the lightbox
+  checkout and cart widget.
 url: https://raw.githubusercontent.com/api-evangelist/sendowl/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:marketing-integration-graph
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
+image: https://www.sendowl.com/twitter-image.png
 tags:
 - Company
-apis: []
+- E-Commerce
+- Digital Products
+- Payments
+- Subscriptions
+- Checkout
+- Memberships
+- Licensing
+- Creator Economy
+- Webhooks
+apis:
+- aid: sendowl:sendowl-api
+  name: SendOwl API
+  description: The SendOwl REST API provides third-party applications access to a merchant account's
+    products, bundles (packages), subscriptions, drip items, orders, discounts, discount codes and
+    license keys. Requests and responses are available in both JSON and XML selected via the Accept
+    header, index actions are paginated with page/per_page (max 50), and authorization uses HTTP
+    Basic with the API key and secret generated in the SendOwl dashboard.
+  humanURL: https://dashboard.sendowl.com/developers/api/introduction
+  baseURL: https://api.sendowl.com/api/v1
+  tags:
+  - Products
+  - Orders
+  - Subscriptions
+  - Discounts
+  - Licenses
+  - Bundles
+  properties:
+  - type: APIReference
+    url: https://dashboard.sendowl.com/developers/api/introduction
+  - type: Authentication
+    url: authentication/sendowl-authentication.yml
+  - type: Conventions
+    url: conventions/sendowl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/sendowl-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/sendowl-rate-limits.yml
+  - type: DataModel
+    url: data-model/sendowl-data-model.yml
+  - type: Webhooks
+    url: asyncapi/sendowl-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/sendowl-domain-security.yml
 - type: Website
   url: https://sendowl.com/
+- type: DeveloperPortal
+  url: https://dashboard.sendowl.com/developers
+- type: Documentation
+  url: https://help.sendowl.com/help
+- type: APIReference
+  url: https://dashboard.sendowl.com/developers/api/introduction
+- type: GettingStarted
+  url: https://help.sendowl.com/help/developer-overview-custom-integrations
+- type: Support
+  url: https://help.sendowl.com/help
+- type: Blog
+  url: https://www.sendowl.com/blog
+- type: GitHubOrganization
+  url: https://github.com/SendOwl
+- type: Pricing
+  url: https://www.sendowl.com/pricing
+- type: SignUp
+  url: https://www.sendowl.com/signup
+- type: TermsOfService
+  url: https://www.sendowl.com/terms
+- type: PrivacyPolicy
+  url: https://www.sendowl.com/privacy
+- type: StatusPage
+  url: https://sendowl.status.io/
+- type: Plans
+  url: plans/sendowl-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sendowl-rate-limits.yml
+- type: Authentication
+  url: authentication/sendowl-authentication.yml
+- type: Conventions
+  url: conventions/sendowl-conventions.yml
+- type: ErrorCatalog
+  url: errors/sendowl-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/sendowl-lifecycle.yml
+- type: Conformance
+  url: conformance/sendowl-conformance.yml
+- type: Packages
+  url: packages/sendowl-packages.yml
+- type: Components
+  url: components/sendowl-components.yml
+- type: Sandbox
+  url: sandbox/sendowl-sandbox.yml
+- type: DataModel
+  url: data-model/sendowl-data-model.yml
+- type: Webhooks
+  url: asyncapi/sendowl-webhooks.yml
+- type: LLMsTxt
+  url: llms/sendowl-llms.txt
 x-vouched-by:
 - Drip
 - MailerLite
 x-vouch-count: 2
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

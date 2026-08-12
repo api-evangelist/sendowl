@@ -1,0 +1,127 @@
+generated: '2026-08-12'
+method: searched
+source: https://registry.npmjs.org, https://rubygems.org, https://pypi.org, https://packagist.org,
+  https://github.com/SendOwl
+official_sdk_count: 0
+note: >-
+  SendOwl publishes NO first-party client library for its REST API in any package registry. The API
+  reference says only "We have just started a GitHub repos with code samples for different langagues"
+  and links github.com/SendOwl/community-code — sample code, not a versioned, installable SDK. The
+  SendOwl GitHub organization holds 17 public repositories, of which 16 are forks of third-party Ruby
+  gems used internally (paperclip, mimemagic, paypal-express, imgix-rails, createsend-ruby,
+  mailerlite-ruby, php-serialize, forceps, omniauth-instagram, slate-serializers and similar) and one
+  is the community sample-code repo. Because no first-party API client library exists, NO `SDKs`
+  pointer is emitted for this provider — the only first-party distributable is the browser-side
+  sendowl.js checkout library, which is a UI/checkout component (see components/) rather than an API
+  client. Everything installable that wraps the SendOwl REST API is third-party and unmaintained: the
+  newest such package was last published in January 2023 and the two actual API wrappers were last
+  published in 2022 and 2017.
+packages:
+- language: javascript
+  registry: cdn
+  name: sendowl.js
+  url: https://transactions.sendowl.com/assets/sendowl.js
+  install: <script src="https://transactions.sendowl.com/assets/sendowl.js"></script>
+  official: true
+  kind: browser-checkout-library
+  version: null
+  published: null
+  note: >-
+    First-party, but CDN-distributed with an UNPINNED URL — there is no version segment in the path, no
+    registry metadata endpoint, no jsDelivr/unpkg entry, and the served file carries no version banner
+    (verified 200, application/javascript, 11,632 bytes on 2026-08-12). A consumer cannot tell which
+    build they are loading and cannot pin one; the same URL silently floats to whatever SendOwl ships.
+    Recorded as null because it was checked and there is genuinely nothing to record, not because it
+    was skipped.
+  documentation: https://dashboard.sendowl.com/developers/api/sendowl-js
+- language: multiple
+  registry: github
+  name: SendOwl/community-code
+  url: https://github.com/SendOwl/community-code
+  install: null
+  official: true
+  kind: sample-code
+  version: null
+  published: '2022-09-03'
+  note: >-
+    The repository the API reference links as "Code Libraries". PHP-dominant sample code, 14 stars,
+    last pushed 2022-09-03. Not published to any package registry and not versioned, so there is no
+    release to record — `published` is the last push date to the default branch.
+- language: javascript
+  registry: npm
+  name: sendowl-js
+  url: https://www.npmjs.com/package/sendowl-js
+  install: npm install sendowl-js
+  official: false
+  kind: api-client
+  version: 0.0.8
+  published: '2022-09-29'
+  repository: https://github.com/imreyne/sendowl-js
+  note: Third-party Node.js wrapper for the SendOwl API. Name collides confusingly with SendOwl's own
+    browser sendowl.js, which is a different thing.
+- language: javascript
+  registry: npm
+  name: sendowl-node
+  url: https://www.npmjs.com/package/sendowl-node
+  install: npm install sendowl-node
+  official: false
+  kind: api-client
+  version: 1.0.3
+  published: '2017-02-20'
+  repository: https://github.com/sanderpick/sendowl-node
+  note: Third-party Node.js client, last published 2017 — predates the v1_2 discounts and v1_3 orders
+    endpoints documented today.
+- language: javascript
+  registry: npm
+  name: '@pipedream/sendowl'
+  url: https://www.npmjs.com/package/@pipedream/sendowl
+  install: npm install @pipedream/sendowl
+  official: false
+  kind: integration-components
+  version: 0.0.3
+  published: '2023-01-23'
+  note: Pipedream platform components, published by Pipedream rather than SendOwl.
+- language: ruby
+  registry: rubygems
+  name: sendowl
+  url: https://rubygems.org/gems/sendowl
+  install: gem install sendowl
+  official: false
+  kind: api-client
+  version: 0.0.2
+  published: '2019-09-10'
+  repository: https://github.com/tdtadeu/sendowl
+  note: Third-party Ruby client by Thiago Dias; 0.0.2 is the latest release.
+registries_checked:
+- registry: npm
+  result: 3 third-party packages, 0 first-party
+- registry: rubygems
+  result: 1 third-party gem (sendowl 0.0.2), 0 first-party
+- registry: pypi
+  result: 404 for https://pypi.org/pypi/sendowl/json — no package
+- registry: packagist
+  result: 0 results for "sendowl"
+- registry: crates.io
+  result: no SendOwl client found
+- registry: nuget
+  result: no SendOwl client found
+- registry: maven-central
+  result: no SendOwl client found
+- registry: pkg.go.dev
+  result: no SendOwl client found
+x-evidence:
+- url: https://transactions.sendowl.com/assets/sendowl.js
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://registry.npmjs.org/-/v1/search?text=sendowl
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://rubygems.org/api/v1/versions/sendowl.json
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://pypi.org/pypi/sendowl/json
+  http_status: 404
+  fetched: '2026-08-12'
+- url: https://api.github.com/users/sendowl/repos
+  http_status: 200
+  fetched: '2026-08-12'

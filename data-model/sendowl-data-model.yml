@@ -1,0 +1,199 @@
+generated: '2026-08-12'
+method: searched
+source: https://dashboard.sendowl.com/developers/api/introduction
+note: >-
+  Normally derived from OpenAPI $ref links. SendOwl publishes no OpenAPI, so this entity graph is read
+  field-by-field from the provider's own object reference pages (products, bundles, subscriptions, drip
+  items, orders, discounts, licenses). Every entity, field and relationship below appears verbatim in
+  those pages — nothing is inferred beyond naming the relationship implied by a documented id field or
+  nested collection.
+id_scheme:
+  format: integer
+  prefixes: false
+  note: All resources are addressed by a bare integer id (no prefixed/typed ids). Purchase keys
+    (e.g. 91F88853) are separate per-product/bundle strings used in public checkout URLs, not ids.
+polymorphic_types:
+  orderable:
+    used_by: orders filter (`orderable`), discount limits
+    values:
+    - Product
+    - Package
+    - Subscription
+    format: '"{Type}-{id}", e.g. Product-5, Package-10, Subscription-15'
+  drip_orderable:
+    used_by: drip items
+    values:
+    - Product
+    - Package
+entities:
+- name: Product
+  path: /api/v1/products
+  key_fields: [id, product_type, name, category, subcategory, attachment, price, currency_code,
+    pdf_stamping, sales_limit, self_hosted_url, license_type, license_fetch_url, shopify_variant_id,
+    custom_field, price_is_minimum, limit_to_single_qty_in_cart, download_folder, affiliate_sellable,
+    commission_rate, weight, drip_items, created_at, updated_at]
+  operations: [index, search, shopify_lookup, show, create, update, delete, issue]
+- name: Bundle
+  aka: Package
+  path: /api/v1/packages
+  key_fields: [id, name, category, subcategory, price, custom_field, components, shopify_variant_id,
+    currency_code, override_currency_code, product_image_url, instant_buy_url, add_to_cart_url,
+    sales_page_url, price_is_minimum, limit_to_single_qty_in_cart, affiliate_sellable, commission_rate,
+    access_all_products, access_after_order_creation, access_after_order_creation_includes_previous,
+    created_at, updated_at]
+  operations: [index, search, shopify_lookup, show, create, update, delete, issue]
+  note: Renamed to "bundle" in the product; the API paths still say packages.
+- name: Subscription
+  path: /api/v1/subscriptions
+  key_fields: [id, name, category, subcategory, trial_price, trial_frequency, trial_no_of_occurrences,
+    recurring_price, frequency_interval, frequency_value, recurring_type, no_of_occurrences,
+    access_all_products, access_drip, access_subset_products, components, sell_tangible_product,
+    sell_service, perform_redirect, redirect_url, custom_field, currency_code, override_currency_code,
+    product_image_url, instant_buy_url, sales_page_url, affiliate_sellable, commission_rate,
+    drip_items, created_at, updated_at]
+  operations: [index, search, show, create, drip_items, update, delete, issue]
+  enums:
+    frequency_interval: [day, week, month, year]
+    recurring_type: [fixed, ongoing]
+- name: DripItem
+  path: /api/v1/drip_items
+  key_fields: [id, release_after_human_value, release_after_human_interval, drip_orderable_type,
+    drip_orderable_id]
+  operations: [create, update, delete]
+  enums:
+    release_after_human_interval: [day, week, month]
+    drip_orderable_type: [Product, Package]
+- name: Order
+  path: /api/v1_3/orders
+  key_fields: [buyer_name, buyer_email, buyer_id, buyer_status, tag, giftee_name, giftee_email,
+    shipping_address1, shipping_address2, shipping_city, shipping_region, shipping_postcode,
+    shipping_country, billing_address1, billing_address2, billing_city, billing_region,
+    billing_postcode, billing_country, can_market_to_buyer, buyer_ip_address, dispatched_at, issued_at,
+    state, referred_by]
+  operations: [index, search, show, update, refund, cancel_subscription, resend_email,
+    download_restrictions, override_country, access_grant, access_revoke]
+  filters: [from, to, updated_after, orderable, state, referred_by, sort]
+- name: FinancialTransaction
+  path: nested in POST /api/v1/products/{product_id}/issue
+  key_fields: [gateway_transaction_id, gateway_parent_transaction_id, gateway_transaction_type,
+    payment_currency, payment_gross, payment_gateway_fee, payment_tax, handling, shipping,
+    affiliate_fee, payment_date]
+  operations: [create-via-issue]
+- name: Discount
+  path: /api/v1_2/discounts
+  key_fields: [id, name, code, limited_to_products, limited_to_products_url, multiple_codes,
+    discount_codes_url, currency_code, override_currency_code, usage_limit, minimum_cart_value,
+    expires_at, fixed_discount, percentage_discount, created_at, updated_at]
+  operations: [index, show, search, create, update, delete]
+  enums:
+    use_limited_type: [one_code_unlimited_uses, one_code_limited_uses, many_codes_one_use]
+- name: DiscountCode
+  path: /api/v1_2/discounts/{discount_id}/discount_codes
+  operations: [index, create, delete]
+- name: DiscountOrderable
+  path: /api/v1_2/discounts/{discount_id}/discount_orderables
+  operations: [index, create, delete]
+  note: The product/bundle limit list for a discount.
+- name: License
+  path: /api/v1/products/{product_id}/licenses
+  key_fields: [id, product_id, order_id, order_refunded, key]
+  operations: [index_by_order, index_by_product, create, check_valid]
+relationships:
+- from: Bundle
+  to: Product
+  kind: has_many
+  via: components.product_ids
+- from: Subscription
+  to: Product
+  kind: has_many
+  via: components.product_ids
+  condition: when access_subset_products is true
+- from: Product
+  to: DripItem
+  kind: has_many
+  via: drip_items (POST /api/v1/products/{product_id}/drip_items)
+- from: Subscription
+  to: DripItem
+  kind: has_many
+  via: drip_items (POST /api/v1/subscriptions/{subscription_id}/drip_items)
+- from: DripItem
+  to: Product
+  kind: belongs_to
+  via: drip_orderable_id (when drip_orderable_type = Product)
+- from: DripItem
+  to: Bundle
+  kind: belongs_to
+  via: drip_orderable_id (when drip_orderable_type = Package)
+- from: Order
+  to: License
+  kind: has_many
+  via: GET /api/v1/orders/{order_id}/licenses
+- from: Product
+  to: License
+  kind: has_many
+  via: GET /api/v1/products/{product_id}/licenses
+- from: License
+  to: Order
+  kind: belongs_to
+  via: order_id
+- from: License
+  to: Product
+  kind: belongs_to
+  via: product_id
+- from: Order
+  to: Product
+  kind: belongs_to
+  via: orderable filter (Product-{id})
+- from: Order
+  to: Bundle
+  kind: belongs_to
+  via: orderable filter (Package-{id})
+- from: Order
+  to: Subscription
+  kind: belongs_to
+  via: orderable filter (Subscription-{id})
+- from: Order
+  to: FinancialTransaction
+  kind: has_many
+  via: financial_transaction[] on product issue
+- from: Discount
+  to: DiscountCode
+  kind: has_many
+  via: discount_codes_url (when multiple_codes is true)
+- from: Discount
+  to: DiscountOrderable
+  kind: has_many
+  via: limited_to_products_url (when limited_to_products is true)
+- from: Product
+  to: ShopifyVariant
+  kind: has_one
+  via: shopify_variant_id
+  external: true
+- from: Bundle
+  to: ShopifyVariant
+  kind: has_one
+  via: shopify_variant_id
+  external: true
+render: null
+x-evidence:
+- url: https://dashboard.sendowl.com/developers/api/products
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/bundles
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/subscriptions
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/drip_items
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/orders
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/discounts
+  http_status: 200
+  fetched: '2026-08-12'
+- url: https://dashboard.sendowl.com/developers/api/licenses
+  http_status: 200
+  fetched: '2026-08-12'
