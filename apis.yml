@@ -11,7 +11,7 @@ description: SendOwl is a UK-based digital commerce platform that lets creators 
 url: https://raw.githubusercontent.com/api-evangelist/sendowl/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:marketing-integration-graph
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-12'
 modified: '2026-08-12'
 image: https://www.sendowl.com/twitter-image.png
