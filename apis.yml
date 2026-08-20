@@ -20,6 +20,17 @@ tags:
 - E-Commerce
 - Digital Products
 - Payments
+- Subscription
+- Checkout
+- Memberships
+- Licensing
+- Creator Economy
+- Webhook
+tags_raw:
+- Company
+- E-Commerce
+- Digital Products
+- Payments
 - Subscriptions
 - Checkout
 - Memberships
@@ -37,6 +48,13 @@ apis:
   humanURL: https://dashboard.sendowl.com/developers/api/introduction
   baseURL: https://api.sendowl.com/api/v1
   tags:
+  - Product
+  - Order
+  - Subscription
+  - Discounts
+  - Licenses
+  - Bundles
+  tags_raw:
   - Products
   - Orders
   - Subscriptions
