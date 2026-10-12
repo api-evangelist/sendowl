@@ -1,0 +1,421 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/sendowl/integrations
+checked:
+- https://composio.dev/toolkits/sendowl
+- https://monid.ai/tools/sendowl
+- https://n8n.io/integrations/sendowl/
+- https://zapier.com/apps/sendowl/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: sendowl
+  url: https://zapier.com/apps/sendowl/integrations
+  external_url: https://www.sendowl.com/
+  partner_tier: SILVER
+  triggers:
+  - key: new_order
+    label: New Order
+  - key: payment
+    label: New Payment
+  - key: refund
+    label: New Refund
+  - key: subscription_end
+    label: Subscription Termination
+  actions: []
+  searches: []
+edges:
+- partner_name: Mailchimp
+  partner: mailchimp
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/mailchimp
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://mailchimp.com/
+- partner_name: Kajabi
+  partner: kajabi
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/kajabi
+  direction: third-party
+  category: eCommerce
+  partner_url: http://kajabi.com/
+- partner_name: Flodesk
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/flodesk
+  direction: third-party
+  category: Email Newsletters
+  partner_url: https://flodesk.com/
+- partner_name: Teachable
+  partner: teachable
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/teachable
+  direction: third-party
+  category: Online Courses
+  partner_url: https://teachable.com/
+- partner_name: ActiveCampaign
+  partner: activecampaign
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/activecampaign
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.activecampaign.com/?utm_source=unpaid_syndication_website&utm_medium=referral&utm_campaign=zapier_listing
+- partner_name: WooCommerce
+  partner: woocommerce
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/woocommerce
+  direction: third-party
+  category: eCommerce
+  partner_url: https://woocommerce.com/products/woocommerce-zapier/?utm_source=zapier&utm_medium=website&utm_campaign=integration
+- partner_name: Campaign Monitor
+  partner: campaignmonitor
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/campaign-monitor
+  direction: third-party
+  category: Email Newsletters
+  partner_url: https://go.campaignmonitor.com/partner-referral?referring_partner=Zapier
+- partner_name: MailerLite Classic
+  partner: mailerlite
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/mailerlite-classic
+  direction: third-party
+  category: Email Newsletters
+  partner_url: https://www.mailerlite.com/
+- partner_name: Gist
+  partner: gist
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/gist
+  direction: third-party
+  category: Customer Support
+  partner_url: https://app.getgist.com/
+- partner_name: HubSpot
+  partner: hubspot
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/hubspot
+  direction: third-party
+  category: Marketing Automation
+  partner_url: http://www.hubspot.com/
+- partner_name: Brevo
+  partner: brevo
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/brevo
+  direction: third-party
+  category: Email Newsletters
+  partner_url: https://www.sendinblue.com/?utm_medium=plugin&utm_source=zapier
+- partner_name: WordPress
+  partner: wordpress
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/wordpress
+  direction: third-party
+  category: Website Builders
+  partner_url: https://wordpress.org/
+- partner_name: Drip
+  partner: drip
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/drip
+  direction: third-party
+  category: Drip Emails
+  partner_url: https://www.getdrip.com/
+- partner_name: WishList Member
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/wishlist-member
+  direction: third-party
+  category: Marketing Automation
+  partner_url: http://member.wishlistproducts.com/
+- partner_name: MailerLite
+  partner: mailerlite
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/mailerlite
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.mailerlite.com/?utm_source=zapier&utm_medium=partner&utm_campaign=profile&utm_term=learn_more&utm_content=integrations
+- partner_name: Keap
+  partner: keap
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/keap
+  direction: third-party
+  category: CRM (Customer Relationship Management)
+  partner_url: https://keap.com/
+- partner_name: GetResponse
+  partner: getresponse
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/getresponse
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.getresponse.com/
+- partner_name: Square
+  partner: square
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/square
+  direction: third-party
+  category: eCommerce
+  partner_url: https://squareup.com/t/cmtp_performance/pr_developers/d_partnerships/p_zapier/?route=
+- partner_name: Podia
+  partner: podia
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/podia
+  direction: third-party
+  category: Online Courses
+  partner_url: https://www.podia.com/
+- partner_name: AWeber
+  partner: aweber
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/aweber
+  direction: third-party
+  category: Email Newsletters
+  partner_url: http://zpr.io/6S2qW
+- partner_name: Google Sheets
+  partner: google-sheets
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/google-sheets
+  direction: third-party
+  category: Google
+  partner_url: http://sheets.google.com/
+- partner_name: Facebook Conversions
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/facebook-conversions
+  direction: third-party
+  category: Ads & Conversion
+  partner_url: https://developers.facebook.com/docs/marketing-api/server-side-api/guides/zapier-integration
+- partner_name: Dropbox
+  partner: dropbox
+  partner_match: name-exact
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/dropbox
+  direction: third-party
+  category: File Management & Storage
+  partner_url: https://dropbox.com/
+- partner_name: ClickFunnels Classic
+  partner: clickfunnels
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/clickfunnels-classic
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.clickfunnels.com/
+- partner_name: Shopify
+  partner: shopify
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/shopify
+  direction: third-party
+  category: eCommerce
+  partner_url: https://www.shopify.com/
+- partner_name: MemberVault
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/membervault
+  direction: third-party
+  category: Online Courses
+  partner_url: https://membervault.co/
+- partner_name: LeadConnector
+  partner: null
+  partner_match: null
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/leadconnector
+  direction: third-party
+  category: Marketing Automation
+  partner_url: https://www.leadconnectorhq.com/
+- partner_name: Stripe (Legacy)
+  partner: stripe
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/stripe-legacy
+  direction: third-party
+  category: Payment Processing
+  partner_url: https://stripe.com/
+- partner_name: EmailOctopus
+  partner: emailoctopus
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/emailoctopus
+  direction: third-party
+  category: Email Newsletters
+  partner_url: https://emailoctopus.com/account/sign-up
+- partner_name: Manychat
+  partner: manychat
+  partner_match: domain
+  partner_candidate: null
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/sendowl/integrations/manychat
+  direction: third-party
+  category: Social Media Marketing
+  partner_url: https://manychat.com/
+templates:
+- title: Archive new SendOwl orders in Google Sheets
+  url: https://zapier.com/apps/google-sheets/integrations/sendowl/10967/archive-new-sendowl-orders-in-google-sheets
+  apps:
+  - sendowl
+  - google-sheets
+- title: Track new SendOwl orders by sending purchase events to Facebook Conversions
+  url: https://zapier.com/apps/facebook-conversions/integrations/sendowl/1385579/track-new-sendowl-orders-by-sending-purchase-events-to-facebook-conversions
+  apps:
+  - sendowl
+  - facebook-conversions
+- title: Send Slack messages for new SendOwl orders
+  url: https://zapier.com/apps/sendowl/integrations/slack/11104/send-slack-messages-for-new-sendowl-orders
+  apps:
+  - sendowl
+  - slack
+- title: Add or update contacts on ActiveCampaign from new SendOwl orders
+  url: https://zapier.com/apps/activecampaign/integrations/sendowl/9870/add-or-update-contacts-on-activecampaign-from-new-sendowl-orders
+  apps:
+  - sendowl
+  - activecampaign
+- title: Add Kit tag subscribers for new SendOwl orders
+  url: https://zapier.com/apps/kit/integrations/sendowl/9876/add-kit-tag-subscribers-for-new-sendowl-orders
+  apps:
+  - sendowl
+  - kit
+- title: Create Mailchimp subscribers from new SendOwl orders
+  url: https://zapier.com/apps/mailchimp/integrations/sendowl/9185/create-mailchimp-subscribers-from-new-sendowl-orders
+  apps:
+  - sendowl
+  - mailchimp
+- title: Create E-goi subscribers from new SendOwl orders
+  url: https://zapier.com/apps/e-goi/integrations/sendowl/9530/create-e-goi-subscribers-from-new-sendowl-orders
+  apps:
+  - sendowl
+  - e-goi
+- title: Create new Xero invoices for new SendOwl orders
+  url: https://zapier.com/apps/sendowl/integrations/xero/9874/create-new-xero-invoices-for-new-sendowl-orders
+  apps:
+  - sendowl
+  - xero
+- title: POST new SendOwl orders to a webhook URL
+  url: https://zapier.com/apps/sendowl/integrations/webhook/9875/post-new-sendowl-orders-to-a-webhook-url
+  apps:
+  - sendowl
+  - webhook
+- title: Send new emails via Gmail for new SendOwl orders
+  url: https://zapier.com/apps/gmail/integrations/sendowl/9877/send-new-emails-via-gmail-for-new-sendowl-orders
+  apps:
+  - sendowl
+  - gmail
+- title: Send email for new SendOwl orders
+  url: https://zapier.com/apps/email/integrations/sendowl/11103/send-email-for-new-sendowl-orders
+  apps:
+  - sendowl
+  - email
+- title: Create WhatConverts leads from new SendOwl orders
+  url: https://zapier.com/apps/sendowl/integrations/whatconverts/18726/create-whatconverts-leads-from-new-sendowl-orders
+  apps:
+  - sendowl
+  - whatconverts
+template_total: 60
