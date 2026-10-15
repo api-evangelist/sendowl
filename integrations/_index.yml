@@ -366,3 +366,16 @@
   source: edge
   status: pending-partner-spec
   arazzo: null
+- slug: sendowl-stripe-own
+  label: Stripe (own)
+  partner: stripe
+  partner_name: Stripe (own)
+  category: commerce
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.stripe.com/apps/sendowl
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
