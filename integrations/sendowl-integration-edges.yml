@@ -13,6 +13,13 @@ checked:
 - https://zapier.com/api/v4/apps/
 - https://zapier.com/apps/sendowl/integrations
 - stripe/integrations/stripe-integration-edges.yml
+- https://docs.stripe.com/stripe-apps
+- https://docs.stripe.com/stripe-apps/review-requirements
+- https://marketplace.stripe.com/
+- https://marketplace.stripe.com/appm/apps
+- https://stripe.com/partners/directory
+- https://stripe.com/partners/verified-partners
+- https://stripe.partners/sitemap.xml
 summary: null
 marketplace_apps:
 - marketplace: zapier
@@ -491,6 +498,51 @@ edges:
   direction: third-party
   category: Email Newsletters
   partner_url: https://emailoctopus.com/account/sign-up
+- partner_name: Stripe Partner Ecosystem
+  partner: stripe
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://stripe.partners/directory/sendowl
+  category: Stripe ecosystem partner
+  contract_reference:
+    register: Stripe Partner Ecosystem directory (stripe.com/partners/directory -> stripe.partners, PartnerPage
+      SSR __NUXT_DATA__)
+    standard: Stripe Partner Ecosystem
+    spec_file: null
+    role: stripe-verified-partner
+    registered_name: Sendowl
+    register_id: sendowl
+    partner_tier:
+    - Premier Apps Partner
+    matched_domain: sendowl.com
+    matched_by: domain
+    identity_source: the directory's own website field for the partner (no lookup)
+    signal_note: 'certified_products = ONE entry per verified product type (Premier Apps / SaaS Platform / Payments
+      Partner: Stripe verified the product integration; no dates printed, lapsed null = unknown); Premier Services
+      Partner is a services tier (partner_tier only); Certified Professional Developers certify PEOPLE (context);
+      callouts / products never counted'
+    context:
+      callouts:
+      - Ecommerce
+      stripe_products:
+      - Checkout
+      - Connect
+      - Payment Links
+      - Payments
+      location: 9th Floor, 107 Cheapside, London, England
+    detected_by: sweep-stripe-app-marketplace.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: Sendowl
+      product_type: Stripe App (verified app integration)
+      certifier: Stripe (Verified Partner program)
+      verification: Premier Apps Partner
+      lapsed: null
+  detected_by: sweep-stripe-app-marketplace.py
+  first_seen: '2026-10-21'
 templates:
 - title: Archive new SendOwl orders in Google Sheets
   url: https://zapier.com/apps/google-sheets/integrations/sendowl/10967/archive-new-sendowl-orders-in-google-sheets
