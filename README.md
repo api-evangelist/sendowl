@@ -64,26 +64,115 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-SendOwl is a UK-based digital commerce platform for selling digital products, subscriptions,
-memberships, license keys, drip-delivered courses and physical goods, with hosted checkout and
-automated file delivery.
+SendOwl is a UK-based digital commerce platform that lets creators and small businesses sell digital products, subscriptions, memberships, license keys, drip-delivered courses and physical goods, with hosted checkout, automated file delivery, PDF stamping, affiliate programs, discount codes and EU VAT handling. It exposes a public REST API at api.sendowl.com covering products, bundles (packages), subscriptions, drip items, orders, discounts and licenses in both JSON and XML, authenticated with HTTP Basic using an account API key and secret, alongside an outbound webhook surface signed with HMAC-SHA256 and a browser-side sendowl.js library that drives the lightbox checkout and cart widget.
 
-- Website: https://sendowl.com/
-- Developer portal: https://dashboard.sendowl.com/developers
-- API reference: https://dashboard.sendowl.com/developers/api/introduction
-- API base URL: `https://api.sendowl.com/api/v1`
-- Status: https://sendowl.status.io/
+**Areas:** Company · E-Commerce · Digital Products · Payments · Subscription · Checkout · Membership · Licensing · Creator Economy · Webhook
 
-## API surface
+## SendOwl on APIs.io
 
-A public REST API covering products, bundles (packages), subscriptions, drip items, orders,
-discounts and licenses, in JSON or XML selected by the `Accept` header, authenticated with HTTP
-Basic (API key + secret). Version is pinned **per resource** inside one base host — discounts at
-`/api/v1_2/`, orders at `/api/v1_3/`, everything else at `/api/v1/`. Fourteen outbound webhook
-events are signed with `X-SENDOWL-HMAC-SHA256` and retried 10 times with exponential backoff. A
-first-party browser library, `sendowl.js`, drives the lightbox checkout and cart widget.
+Everything profiled for SendOwl is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sendowl/](https://apis.io/providers/sendowl/)** — or go straight to one of the APIs or properties below.
 
-SendOwl publishes **no machine-readable contract** — no OpenAPI/Swagger, AsyncAPI, GraphQL, MCP
-server or A2A agent card, and no `/.well-known/*` document on any of its four hosts. The artifacts
-in this repo are read from the provider's own hand-written HTML reference and help center, and each
-one records the URL and HTTP status it was read from.
+### APIs (1)
+
+- [SendOwl API](https://apis.io/apis/sendowl/sendowl-api/) — The SendOwl REST API provides third-party applications access to a merchant account's products, bundles (packages), subscriptions, drip items, orders,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Sendowl Webhooks](https://apis.io/asyncapis/sendowl/sendowl-webhooks/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Sendowl Authentication](https://apis.io/security/sendowl/sendowl-authentication/)
+- [Sendowl Domain Security](https://apis.io/security/sendowl/sendowl-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Sendowl Plans Pricing](https://apis.io/plans/sendowl/sendowl-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Sendowl Rate Limits](https://apis.io/rate-limits/sendowl/sendowl-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://sendowl.com/)
+- [Documentation](https://help.sendowl.com/help)
+- [Getting started](https://help.sendowl.com/help/developer-overview-custom-integrations)
+- [API reference](https://dashboard.sendowl.com/developers/api/introduction)
+- [Pricing](https://www.sendowl.com/pricing)
+- [Sign up](https://www.sendowl.com/signup)
+- [Support](https://help.sendowl.com/help)
+- [Blog](https://www.sendowl.com/blog)
+- [Terms of service](https://www.sendowl.com/terms)
+- [Privacy policy](https://www.sendowl.com/privacy)
+- [GitHub](https://github.com/SendOwl)
+- [Status](https://sendowl.status.io/)
+
+## API Evangelist rating
+
+**Kin Score 53.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 76.3 |
+
+**Agent readiness 25.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 22.3** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sendowl/](https://apis.io/providers/sendowl/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for SendOwl: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sendowl/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
